@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { useState } from 'react';
+import Users from './components/Users';
+import Portfolios from './components/Portfolios';
+import Stocks from './components/Stocks';
 
 function App() {
+  const [selectedUserId, setSelectedUserId] = useState<string>('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box p={4}>
+      <Heading mb={4}>Investment Portfolio Tracker</Heading>
+      <Tabs isFitted variant="enclosed">
+        <TabList>
+          <Tab>Users</Tab>
+          <Tab>Portfolios</Tab>
+          <Tab>Stocks</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel><Users /></TabPanel>
+          <TabPanel><Portfolios selectedUserId={selectedUserId} setSelectedUserId={setSelectedUserId} /></TabPanel>
+          <TabPanel><Stocks selectedUserId={selectedUserId}/></TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Box>
   );
 }
 
